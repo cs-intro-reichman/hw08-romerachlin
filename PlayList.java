@@ -96,34 +96,71 @@ class PlayList {
      *  is full, does nothing and returns false. Otherwise, inserts the track and
      *  returns true. */
     public boolean add(int i, Track track) {
-        //// replace the following statement with your code
-        return false;
+        if (i<0 || i>maxSize || size==maxSize) {
+            return false;
+        }else{        
+        for (int j = size-1; i <= j; j--) {
+            tracks[j+1] = tracks[j];
+        }
+        tracks[i] = track;
+        size++;
+        return true;
+        }
+        
     }
      
     /** Removes the track in the given index from this list.
      *  If the list is empty, or the given index is negative or too big for this list, 
      *  does nothing and returns -1. */
     public void remove(int i) {
-        //// replace this comment with your code
+        if (i<0 || i>maxSize) {
+            return;
+        }else{   
+            for (int j = i; j <size; j++) {
+                tracks[j] = tracks[j+1];
+            }
+            size--;
+        }
     }
 
     /** Removes the first track that has the given title from this list.
      *  If such a track is not found, or the list is empty, or the given index
      *  is negative or too big for this list, does nothing. */
     public void remove(String title) {
-        //// replace this comment with your code
+       if (size==0) {
+         return;
+       }else{
+        for (int i = 0; i < size; i++) {
+            if (title.equals(tracks[i].getTitle())) {
+                remove(i);
+       }
     }
+    }
+    return;
+}
 
     /** Removes the first track from this list. If the list is empty, does nothing. */
     public void removeFirst() {
-        //// replace this comment with your code
+        if (size==0) {
+            return;
+          }else{
+            remove(0);
+          }
     }
     
     /** Adds all the tracks in the other list to the end of this list. 
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
      public void add(PlayList other) {
-        //// replace this comment with your code
+        if (other.getSize()+size>maxSize) {
+           return;
+        }else{
+            for (int i = 0; i < other.getSize(); i++) {
+                add(i+size, other.getTrack(i));
+            }
+            size += other.getSize();
+        }
+        return;
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
