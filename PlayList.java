@@ -170,8 +170,22 @@ class PlayList {
      *  If start is negative or greater than size - 1, returns -1.
      */
     private int minIndex(int start) {
-        //// replace the following statement with your code
-        return 0;
+        if (start<0 || start>size-1) {
+            return -1;
+        }else{
+        int min = tracks[start].getDuration();
+        for (int i = start+1; i < size; i++) {
+         if (min > tracks[i].getDuration()) {
+            min = tracks[i].getDuration();
+         }
+        }
+        for (int i = 0; i < size; i++) {
+            if (min == tracks[i].getDuration()) {
+                return i;
+            }
+        }
+    }
+    return -1;
     }
 
     /** Returns the title of the shortest track in this list. 
